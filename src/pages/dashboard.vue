@@ -3,7 +3,6 @@
 
 <template>
   <div class="dashboard-container">
-    <h1 class="dashboard-title">Dashboard Cryptocurrency</h1>
 
     <!-- Message / Toast -->
     <transition name="fade">
@@ -226,13 +225,6 @@ onMounted(fetchMarketRank)
   padding: 24px;
 }
 
-.dashboard-title {
-  font-size: 28px;
-  font-weight: 600;
-  margin-bottom: 24px;
-  color: var(--cyan-primary);
-}
-
 .card {
   background: var(--dark-tertiary);
   border-radius: var(--radius-lg);
@@ -242,10 +234,10 @@ onMounted(fetchMarketRank)
 }
 
 .card-title {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
-  margin-bottom: 20px;
-  color: var(--white);
+  margin-bottom: 25px;
+  color: var(--cyan-primary);
 }
 
 .period-buttons {

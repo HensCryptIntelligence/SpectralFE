@@ -129,6 +129,77 @@ html, body {
   overflow-x: hidden;
 }
 
+/* Custom Scrollbar - Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--cyan-primary) var(--dark-tertiary);
+}
+
+/* Custom Scrollbar - Webkit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-tertiary);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--cyan-primary) 0%, var(--pink-medium) 100%);
+  border-radius: 0;
+  border: none;
+  transition: all var(--transition-base);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--pink-medium) 0%, var(--cyan-primary) 100%);
+  box-shadow: 0 0 12px rgba(0, 255, 160, 0.6);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: var(--cyan-primary);
+  box-shadow: 0 0 20px rgba(0, 255, 160, 1);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--dark-tertiary);
+}
+
+/* Scrollbar horizontal (loading bar style) */
+::-webkit-scrollbar:horizontal {
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  background: linear-gradient(90deg, var(--cyan-primary) 0%, var(--pink-medium) 100%);
+}
+
+/* Scrollbar untuk area spesifik (opsional) */
+.table-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, var(--cyan-primary) 0%, var(--pink-light) 100%);
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 160, 0.4);
+  border-radius: 0;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 160, 0.7);
+}
+
 /* App Container */
 .app {
   min-height: 100vh;
