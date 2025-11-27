@@ -1,85 +1,42 @@
+
+<!-- file : frontend/src/components/Sidebar.vue -->
+
 <template>
   <aside 
     class="sidebar" 
     :class="{ active: isOpen }"
-    role="navigation" 
-    aria-label="Main navigation"
+    role="navigation"
   >
+    <!-- TOP -->
     <div class="sidebar-top">
       <div class="brand">SPECTRAL</div>
+
       <nav class="nav">
-        <NuxtLink to="/dashboard" class="nav-link-wrapper">
-          <button 
-            class="nav-item" 
-            :class="{ active: isActive('/dashboard') }"
-            data-target="dashboard" 
-            aria-label="Dashboard"
-            @click="setActiveMenu('dashboard')"
-          >
-            <span class="icon-wrapper">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="7" height="9" x="3" y="3" rx="1"/>
-                <rect width="7" height="5" x="14" y="3" rx="1"/>
-                <rect width="7" height="9" x="14" y="12" rx="1"/>
-                <rect width="7" height="5" x="3" y="16" rx="1"/>
-              </svg>
-            </span>
-            <span class="label">Dashboard</span>
-          </button>
-        </NuxtLink>
-
-        <NuxtLink to="/tracker" class="nav-link-wrapper">
-          <button 
-            class="nav-item" 
-            :class="{ active: isActive('/tracker') }"
-            data-target="tracker" 
-            aria-label="Tracker"
-            @click="setActiveMenu('tracker')"
-          >
-            <span class="icon-wrapper">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 7V5a2 2 0 0 1 2-2h2"/>
-                <path d="M17 3h2a2 2 0 0 1 2 2v2"/>
-                <path d="M21 17v2a2 2 0 0 1-2 2h-2"/>
-                <path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
-                <circle cx="12" cy="12" r="3"/>
-                <path d="m16 16-1.9-1.9"/>
-              </svg>
-            </span>
-            <span class="label">Tracker</span>
-          </button>
-        </NuxtLink>
-
-        <NuxtLink to="/calculate" class="nav-link-wrapper">
-          <button 
-            class="nav-item" 
-            :class="{ active: isActive('/calculate') }"
-            data-target="calculate" 
-            aria-label="Calculate"
-            @click="setActiveMenu('calculate')"
-          >
-            <span class="icon-wrapper">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="18" height="18" x="3" y="3" rx="2"/>
-                <path d="M17 12h-2l-2 5-2-10-2 5H7"/>
-              </svg>
-            </span>
-            <span class="label">Calculate</span>
-          </button>
+        <NuxtLink
+          v-for="item in menu"
+          :key="item.to"
+          :to="item.to"
+          class="nav-item"
+          :class="{ active: isActive(item.to) }"
+          @click="selectMenu(item.key)"
+          as="div"
+        >
+          <span class="icon-wrapper" v-html="item.icon"></span>
+          <span class="label">{{ item.label }}</span>
         </NuxtLink>
       </nav>
     </div>
 
+    <!-- BOTTOM -->
     <div class="sidebar-bottom">
       <button 
-        class="logout-btn" 
-        aria-label="Log out"
+        class="logout-btn"
         @click="handleLogout"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m16 17 5-5-5-5"/>
-          <path d="M21 12H9"/>
-          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path d="m16 17 5-5-5-5" />
+          <path d="M21 12H9" />
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
         </svg>
       </button>
     </div>
@@ -90,10 +47,7 @@
 import { useRoute, useRouter } from '#app'
 
 const props = defineProps({
-  isOpen: {
-    type: Boolean,
-    default: false
-  }
+  isOpen: Boolean
 })
 
 const emit = defineEmits(['toggle'])
@@ -101,31 +55,68 @@ const emit = defineEmits(['toggle'])
 const route = useRoute()
 const router = useRouter()
 
+// Sidebar menu data (lebih rapi & maintainable)
+const menu = [
+  {
+    key: 'dashboard',
+    to: '/dashboard',
+    label: 'Dashboard',
+    icon: `
+      <svg width="24" height="24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="7" height="9" x="3" y="3" rx="1"/>
+        <rect width="7" height="5" x="14" y="3" rx="1"/>
+        <rect width="7" height="9" x="14" y="12" rx="1"/>
+        <rect width="7" height="5" x="3" y="16" rx="1"/>
+      </svg>
+    `
+  },
+  {
+    key: 'tracker',
+    to: '/tracker',
+    label: 'Tracker',
+    icon: `
+      <svg width="24" height="24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3" />
+        <path d="m16 16-1.9-1.9"/>
+        <path d="M3 7V5a2 2 0 0 1 2-2h2"/>
+        <path d="M17 3h2a2 2 0 0 1 2 2v2"/>
+        <path d="M21 17v2a2 2 0 0 1-2 2h-2"/>
+        <path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
+      </svg>
+    `
+  },
+  {
+    key: 'calculate',
+    to: '/calculate',
+    label: 'Calculate',
+    icon: `
+      <svg width="24" height="24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="18" height="18" x="3" y="3" rx="2"/>
+        <path d="M17 12h-2l-2 5-2-10-2 5H7"/>
+      </svg>
+    `
+  }
+]
+
 const isActive = (path) => {
   return route.path === path
 }
 
-const setActiveMenu = (menu) => {
-  if (typeof window !== 'undefined') {
-    localStorage.setItem('activeMenu', menu)
-    
-    // Close sidebar on mobile after selection
-    if (window.innerWidth <= 768) {
-      emit('toggle')
-    }
-  }
+const selectMenu = (key) => {
+  // Save active menu
+  localStorage.setItem('activeMenu', key)
+
+  // Auto close sidebar on mobile
+  if (window.innerWidth <= 768) emit('toggle')
 }
 
 const handleLogout = () => {
-  if (confirm('Are you sure you want to log out?')) {
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('sidebarOpen')
-      localStorage.removeItem('activeMenu')
-    }
-    
-    // Redirect to logout - adjust path as needed
-    router.push('/auth/logout')
-  }
+  if (!confirm("Are you sure you want to log out?")) return
+
+  localStorage.removeItem('activeMenu')
+  localStorage.removeItem('sidebarOpen')
+
+  router.push('/auth/logout')
 }
 </script>
 

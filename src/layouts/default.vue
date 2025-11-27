@@ -1,3 +1,5 @@
+<!-- frontend/src/layouts/default.vue -->
+
 <template>
   <div class="app">
     <!-- Sidebar Overlay -->
@@ -53,11 +55,25 @@ onMounted(() => {
       }
     })
 
+    let resizeHandler
+
+    onMounted(() => {
+      resizeHandler = () => { 
+        if (window.innerWidth > 768) { isSidebarOpen.value = false }
+      }
+      window.addEventListener('resize', resizeHandler)
+    })
+
+    onUnmounted(() => {
+      window.removeEventListener('resize', resizeHandler)
+    })
+
+
     // Mencegah kembali ke halaman sebelumnya
-    history.pushState(null, "", location.href)
-    window.onpopstate = function () {
-      history.pushState(null, "", location.href)
-    }
+    // history.pushState(null, "", location.href)
+    // window.onpopstate = function () {
+    //   history.pushState(null, "", location.href)
+    // }
   }
 })
 </script>

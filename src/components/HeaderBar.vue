@@ -1,10 +1,12 @@
+<!-- file : frontend/src/components/HeaderBar.vue  -->
+
 <template>
   <header class="topbar">
     <div class="title-wrap">
       <button 
         class="menu-toggle" 
         aria-label="Toggle menu" 
-        :aria-expanded="false"
+        :aria-expanded="isOpen"
         @click="$emit('toggle-menu')"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
