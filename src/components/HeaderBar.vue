@@ -33,6 +33,8 @@ defineEmits(['toggle-menu'])
 
 const route = useRoute()
 
+const isOpen = ref(false);
+
 const pageTitle = computed(() => {
   const path = route.path
   if (path === '/dashboard') return 'Dashboard'
