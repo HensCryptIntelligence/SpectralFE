@@ -2,14 +2,12 @@
 
 <template>
   <div class="app">
-    <!-- Sidebar Overlay -->
     <div 
       class="sidebar-overlay" 
       :class="{ active: isSidebarOpen }"
       @click="toggleSidebar"
     ></div>
 
-    <!-- Sidebar Component -->
     <Sidebar 
       :is-open="isSidebarOpen"
       @toggle="toggleSidebar"
@@ -17,7 +15,7 @@
 
     <main class="main">
       <div class="main-inner">
-        <!-- HeaderBar Component -->
+
         <HeaderBar @toggle-menu="toggleSidebar" />
 
         <div class="content">
